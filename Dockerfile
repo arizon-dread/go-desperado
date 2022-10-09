@@ -12,11 +12,8 @@ RUN go clean -modcache && go mod tidy
 RUN go build .
 
 FROM golang:alpine AS final
-
 WORKDIR /go/
-
 COPY --from=build /go/src/go-desperado /go/
-
 EXPOSE ${PORT}
 
 ENTRYPOINT [ "./go-desperado" ]
