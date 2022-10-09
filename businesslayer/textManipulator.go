@@ -1,8 +1,9 @@
 package businesslayer
 
 import (
-	"example/ws-test/models"
 	"strings"
+
+	"github.com/arizon-dread/go-desperado/models"
 )
 
 func GetTextAsDesperado(input models.Desperado) string {

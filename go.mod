@@ -1,4 +1,4 @@
-module example/ws-test
+module github.com/arizon-dread/go-desperado
 
 go 1.19
 
