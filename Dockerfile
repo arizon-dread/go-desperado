@@ -7,7 +7,7 @@ COPY businesslayer/ models/ main.go go.mod go.sum /go/src/
 
 RUN apk update && apk add --no-cache git
 WORKDIR /go/src
-RUN go get ./...
+RUN go clean -modcache && go mod tidy
 
 RUN go build .
 
