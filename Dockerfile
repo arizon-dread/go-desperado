@@ -1,19 +1,20 @@
-FROM golang:alpine AS build
+FROM golang:1.19-alpine AS build
 LABEL MAINTAINER github.com/arizon-dread
 ENV GIN_MODE=release
 ENV PORT=8080
 
-COPY businesslayer/ models/ main.go go.mod go.sum /go/src/
+COPY businesslayer /usr/local/go/src/github.com/arizon-dread/go-desperado/businesslayer
+COPY models /usr/local/go/src/github.com/arizon-dread/go-desperado/models
+COPY main.go go.mod go.sum /usr/local/go/src/github.com/arizon-dread/go-desperado/
 
 RUN apk update && apk add --no-cache git
-WORKDIR /go/src
-RUN go clean -modcache && go mod tidy
+WORKDIR /usr/local/go/src/github.com/arizon-dread/go-desperado
+RUN go build ./...
 
-RUN go build .
 
-FROM golang:alpine AS final
+FROM alpine:3.16 AS final
 WORKDIR /go/
-COPY --from=build /go/src/go-desperado /go/
+COPY --from=build /usr/local/go/src/github.com/arizon-dread/go-desperado/go-desperado /go/bin/
 EXPOSE ${PORT}
 
-ENTRYPOINT [ "./go-desperado" ]
+ENTRYPOINT [ "/go/bin/go-desperado" ]

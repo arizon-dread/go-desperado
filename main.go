@@ -4,9 +4,7 @@ import (
 	"net/http"
 
 	"github.com/arizon-dread/go-desperado/businesslayer"
-
 	"github.com/arizon-dread/go-desperado/models"
-
 	"github.com/gin-gonic/gin"
 )
 
