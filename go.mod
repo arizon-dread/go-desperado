@@ -3,8 +3,8 @@ module github.com/arizon-dread/go-desperado
 go 1.19
 
 require (
-	github.com/arizon-dread/go-desperado/businesslayer v0.0.0-00010101000000-000000000000
-	github.com/arizon-dread/go-desperado/models v0.0.0-00010101000000-000000000000
+//	github.com/arizon-dread/go-desperado/businesslayer v0.0.0-00010101000000-000000000000
+//  github.com/arizon-dread/go-desperado/models v0.0.0-00010101000000-000000000000
 	github.com/gin-gonic/gin v1.8.1
 )
 
@@ -29,6 +29,6 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
 
-replace github.com/arizon-dread/go-desperado/models => ./models
+//replace github.com/arizon-dread/go-desperado/models => ./models
 
-replace github.com/arizon-dread/go-desperado/businesslayer => ./businesslayer
+//replace github.com/arizon-dread/go-desperado/businesslayer => ./businesslayer

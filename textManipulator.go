@@ -1,12 +1,11 @@
-package businesslayer
+package main
 
 import (
 	"strings"
-
-	"github.com/arizon-dread/go-desperado/models"
+	//"github.com/arizon-dread/go-desperado/models"
 )
 
-func GetTextAsDesperado(input models.Desperado) string {
+func GetTextAsDesperado(input Desperado) string {
 
 	var output string = ""
 	consonants_lower := "bcdfghjklmnpqrstvxz"
