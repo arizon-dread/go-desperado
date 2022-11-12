@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/arizon-dread/go-desperado/businesslayer"
@@ -14,6 +15,7 @@ func main() {
 	router := gin.Default()
 	router.GET("/ping", getPing)
 	router.POST("/desperado", getAsDesperado)
+	router.POST("/birthdaySeconds", birthdaySeconds)
 	router.Run(":8080")
 }
 
@@ -26,8 +28,21 @@ func getAsDesperado(c *gin.Context) {
 	if err := c.BindJSON(&jsonData); err == nil {
 		response := businesslayer.GetTextAsDesperado(jsonData)
 		c.IndentedJSON(http.StatusOK, response)
+
 	} else {
+		fmt.Printf("err: %v", err)
 		c.AbortWithStatus(http.StatusBadRequest)
 	}
 
+}
+func birthdaySeconds(c *gin.Context) {
+	jsonData := models.BirthdaySeconds{}
+
+	if err := c.BindJSON(&jsonData); err == nil {
+		response := businesslayer.DateToSeconds(jsonData.Birthday)
+		c.IndentedJSON(http.StatusOK, response)
+	} else {
+		fmt.Printf("err: %v", err)
+		c.AbortWithStatus(http.StatusBadRequest)
+	}
 }
