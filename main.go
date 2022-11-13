@@ -27,10 +27,10 @@ func getAsDesperado(c *gin.Context) {
 
 	if err := c.BindJSON(&jsonData); err == nil {
 		response := businesslayer.GetTextAsDesperado(jsonData)
-		c.IndentedJSON(http.StatusOK, response)
+		c.JSON(http.StatusOK, response)
 
 	} else {
-		fmt.Printf("err: %v", err)
+		fmt.Printf("err: %vn", err)
 		c.AbortWithStatus(http.StatusBadRequest)
 	}
 
@@ -39,10 +39,16 @@ func birthdaySeconds(c *gin.Context) {
 	jsonData := models.BirthdaySeconds{}
 
 	if err := c.BindJSON(&jsonData); err == nil {
-		response := businesslayer.DateToSeconds(jsonData.Birthday)
-		c.IndentedJSON(http.StatusOK, response)
+		response, err := businesslayer.DateToSeconds(jsonData.Birthday)
+		if err != nil {
+			fmt.Printf("err: %v\n", err)
+			c.AbortWithStatusJSON(http.StatusBadRequest, map[string]interface{}{"error": err.Error()})
+		} else {
+			c.JSON(http.StatusOK, response)
+		}
+
 	} else {
-		fmt.Printf("err: %v", err)
+		fmt.Printf("err: %v\n", err)
 		c.AbortWithStatus(http.StatusBadRequest)
 	}
 }
